@@ -32,7 +32,19 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.textborder {
+  border: 3px solid #555;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+}
+
+.pageboxes {
+  display: inline-block;
 }

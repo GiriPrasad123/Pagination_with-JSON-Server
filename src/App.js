@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import axios from 'axios';
+import Pagination from './Pagination';
 
 function App() {
+  const [data, setData] = useState([]);
+  const [perpage, setPerpage] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:7003/user').then(
+      res => { setData(res.data); setPerpage(res.data.slice(0, 10)); }
+    )
+  }, [])
+  const pageHandler = (pageNumber) => {
+    setPerpage(data.slice((pageNumber * 10) - 10, pageNumber * 10));
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>PAGINATION</h1>
+      {data.length >= 1 ?
+        <div>
+          {perpage.map(post => <div className='textborder'>{post.email}</div>)} <br />
+          <div className='pageboxes'>
+            <Pagination data={data} pageHandler={pageHandler} />
+          </div>
+        </div>
+        : null
+      }
     </div>
   );
 }
