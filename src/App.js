@@ -15,7 +15,7 @@ function App() {
     setPerpage(data.slice((pageNumber * 10) - 10, pageNumber * 10));
   }
   return (
-    <div className="App">
+    <div style={{ width: 'fit-content' }} className="App">
       <h1>PAGINATION</h1>
       {data.length >= 1 ?
         <div>
@@ -29,5 +29,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
